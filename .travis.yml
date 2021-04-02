@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+  - 14
+
+services:
+  - docker
+
+cache:
+  directories:
+    - ~/.cache
+
+install:
+  - yarn
+  - cypress install
+
+script:
+  - yarn run lint
+  - yarn run test:unit
+  - yarn run test:e2e:ci
+
+before_deploy:
+  - docker build -t ${DOCKER_USERNAME}/vue3-realworld-example-app .
+  - docker images
+
+deploy:
+  provider: script
+  script: bash ./scripts/docker_push.sh
+  on:
+    branch: docker
+
+notifications:
+  email: false

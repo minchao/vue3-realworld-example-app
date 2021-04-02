@@ -1,0 +1,11 @@
+/.git*
+/.idea*
+/coverage
+/dist
+/node_modules
+/scripts
+.dockerignore
+.editorconfig
+.env
+.travis.yml
+Dockerfile
